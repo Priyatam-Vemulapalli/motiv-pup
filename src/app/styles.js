@@ -1,14 +1,18 @@
 // styles.js
 
 const ChatbotStyles = {
-    container: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      height: '100vh',
-      backgroundColor: 'pink', 
-    },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+    width: '100vw',
+    backgroundImage: 'url("/wedbackgrounf.png")',
+    backgroundSize: 'cover', 
+    backgroundPosition: 'center', 
+    backgroundRepeat: 'no-repeat', 
+  },
     chatWrapper: {
       width: '350px',
       height: '500px',
@@ -19,15 +23,23 @@ const ChatbotStyles = {
       boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
       overflow: 'hidden',
     },
+    puppyGif: {
+      position: 'absolute', 
+      top: '10px', 
+      left: '50%',
+      transform: 'translateX(-50%)', 
+      height: '50px',
+      width: 'auto',
+      zIndex: 10,
+    },
     header: {
-      backgroundColor: '#7e5bef', 
-      padding: '10px',
-      color: 'white',
+      height: '80px', 
+      backgroundColor: '#7e5bef',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'space-between',
-      borderTopLeftRadius: '16px',
-      borderTopRightRadius: '16px',
+      justifyContent: 'center',
+      padding: 0,
+      overflow: 'hidden',
     },
     username: {
       fontSize: '16px',
@@ -40,7 +52,7 @@ const ChatbotStyles = {
         overflowY: 'scroll', 
         display: 'flex',
         flexDirection: 'column',
-        // The next two lines hides the scrollbar
+        backgroundColor: '#9c6868',
         scrollbarWidth: 'none',
         msOverflowStyle: 'none', 
       },
