@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import ChatbotStyles from './styles'; // Assuming styles.js is in the same folder
+import ChatbotStyles from './styles'; 
 
 export default function Chatbot() {
   const [messages, setMessages] = useState([
