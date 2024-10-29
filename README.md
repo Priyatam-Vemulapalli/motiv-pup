@@ -31,7 +31,7 @@ The Next.js frontend has one primary endpoint:
 Captures an image from the webcam, analyzes it using AWS Rekognition, and returns the detected emotion.
 Used internally by the chatbot interface in src/page.js.
 
-Sends a JSON payload to https://localhost:8080/recieve(modify it in page.js and create that endpoint in the backend) containing:
+Sends a JSON payload to https://localhost:8080/recieve (modify it in page.js and create that endpoint in the backend) containing:
 ```
 {
   "message": "User's message",
