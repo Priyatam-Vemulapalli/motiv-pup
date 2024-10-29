@@ -32,17 +32,21 @@ Captures an image from the webcam, analyzes it using AWS Rekognition, and return
 Used internally by the chatbot interface in src/page.js.
 
 Sends a JSON payload to https://localhost:8080/recieve(modify it in page.js and create that endpoint in the backend) containing:
-
+```
 {
   "message": "User's message",
   "emotion": "Detected emotion of the user"
 }
+```
 and awaits for the reponse body:
+```
 {
   "message": "Message from backend"
 }
+```
 
-###AWS setup assistance:
+
+### AWS setup assistance:
 Sign in to the AWS Management Console:
 
 Go to AWS Management Console.
