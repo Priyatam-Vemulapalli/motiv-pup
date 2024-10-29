@@ -50,30 +50,60 @@ export default function Chatbot() {
 
       const result = await response.json();
       const detectedEmotion = result.emotion || "Emotion detection failed";
+      return detectedEmotion;
 
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text: `You seem to be feeling: ${detectedEmotion}`, sender: 'bot' },
-      ]);
     } catch (error) {
       console.error('Error detecting emotion:', error);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text: 'Error detecting emotion. Please try again.', sender: 'bot' },
-      ]);
+      return "Emotion detection failed";
+      
     }
   };
 
-  const handleSend = () => {
+  const handleSend = async() => {
     if (!userMessage.trim()) return;
-
+    // user messages should be displayed immediately
     setMessages((prevMessages) => [
       ...prevMessages,
       { text: userMessage, sender: 'user' }
     ]);
 
-    captureImage(); // Capture image and analyze emotion when the user sends a message
+    const emotion = await captureImage(); // Capture image and analyze emotion when the user sends a message
 
+    const payload = {
+      message: userMessage,
+      emotion: emotion,
+    };
+    try{
+      const response = await fetch('https://localhost:8080/api/recieve',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+    
+    const backendResponse = await response.json();
+    // Make sure to return the correct JSON body from backend
+    const backendMessage = backendResponse.message || "No response from beckend";
+
+    // Displaying backend's responde in the chat
+    setMessages((prevMessages)=>[
+      ...prevMessages,
+      { test: backendMessage, sender: 'bot'},
+    ]);
+
+    }
+    catch(error){
+      console.error('Error sending data to backend: ',error);
+      setMessages((prevMessages)=>[
+        ...prevMessages,
+        {
+           text: 'Error communicating with backend. Please try again',
+           sender: 'bot'
+        },
+      ]);
+    }
     setUserMessage('');
   };
 
@@ -84,7 +114,7 @@ export default function Chatbot() {
       <img
         src="/puppy.gif"
         alt="Puppy GIF"
-        style={ChatbotStyles.puppyGif} // Applying custom style for positioning
+        style={ChatbotStyles.puppyGif} 
       />
       <div style={ChatbotStyles.chatWrapper}>
         <div style={ChatbotStyles.header}>
